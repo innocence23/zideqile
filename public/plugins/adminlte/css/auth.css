@@ -1,0 +1,16 @@
+.auth-links {
+    margin-top: 10px;
+}
+
+/*添加登陆背景图*/
+.login-page {
+    min-height: 100vh;
+    background: url("/images/bg.jpg");
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+.login-box {
+    margin:  auto !important;
+    padding-top: 12%;
+}
