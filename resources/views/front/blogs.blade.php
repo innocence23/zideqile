@@ -36,7 +36,7 @@
 								<div class="card-content">
 									<h5 class="card-title">
 										<a href="{{ route('blog', $v->slug)}}" title="{{ $v->desc }}">
-											{{ $v->title }}
+											{{ $v->name }}
 										</a>
 									</h5>
 									<h6 class="category text-black">
