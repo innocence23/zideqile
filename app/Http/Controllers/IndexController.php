@@ -10,7 +10,6 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use Intervention\Image\Facades\Image;
 
 class IndexController extends Controller
 {
@@ -73,8 +72,9 @@ class IndexController extends Controller
     public function blogTag($tag)
     {
         $tagId = Tag::where('name', $tag)->firstOrFail();
-        $blogs = Post::Rightjoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
-            ->where('post_tag.tag_id', $tagId['id'])->select('posts.*')->paginate($this->pageSize);
+        $blogs = Post::Rightjoin('taggables', 'taggables.taggable_id', '=', 'posts.id')
+            ->where('taggables.taggable_type', 'App\Post')
+            ->where('taggables.tag_id', $tagId['id'])->select('posts.*')->paginate($this->pageSize);
         return view('front.blogs', ['blogs'=>$blogs]);
     }
 
@@ -106,15 +106,16 @@ class IndexController extends Controller
     {
         $blog = Post::whereSlug($slug)->firstOrFail();
         //有用到tag 弥补缺陷
-//        $tag_ids = array_pluck($blog->tags->toArray(), 'pivot.tag_id');
-//        $tag_post_ids = \DB::table('post_tag')->whereIn('tag_id', $tag_ids)->pluck('post_id')->toArray();
-//        $tag_post_ids = array_unique($tag_post_ids);
+        $tag_ids = array_pluck($blog->tags->toArray(), 'pivot.tag_id');
+        $tag_post_ids = \DB::table('taggables')
+            ->whereIn('tag_id', $tag_ids)
+            ->where('taggable_type', 'App\Post')->pluck('taggable_id')->toArray();
+        $tag_post_ids = array_unique($tag_post_ids);
         //相关类似文章推荐
-        $similarPosts = [];
-//        Post::select(['desc', 'title', 'slug', 'image'])->where([
-//            ['cate_id',$blog->cate_id],
-//            ['id', '!=', $blog->id],
-//        ])->whereIn('id', $tag_post_ids)->orderBy(\DB::raw('RAND()'))->limit(3)->get();
+        $similarPosts = Post::select(['desc', 'name', 'slug', 'image'])->where([
+            ['cate_id',$blog->cate_id],
+            ['id', '!=', $blog->id],
+        ])->whereIn('id', $tag_post_ids)->orderBy(\DB::raw('RAND()'))->limit(3)->get();
 
         //存访问量
         Redis::pipeline(function ($pipe) use($blog) {
@@ -274,18 +275,5 @@ class IndexController extends Controller
     {
         $zhuanti = SinglePage::where('type', 5)->value('content');
         return view('front.zhuanti-info', ['zhuanti'=>$zhuanti]);
-    }
-
-    /**
-     * 测试页面
-     */
-    public function test()
-    {
-        // create new Intervention Image
-        $img = Image::make('1.png');
-
-        $img->colorize(30, 30, 30);
-        // save file as png with medium quality
-        $img->save('11.png', 60);
     }
 }
