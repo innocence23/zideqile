@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\v1;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
 
 class CommentController extends Controller
 {
@@ -60,7 +59,7 @@ function tree($arr, $pid=0){
                     <img src="/uploads/'.$result[1].'" style="max-height: 140px" width="40%" height="40%"/></a>',
                     $content);
             }
-            $avatar = $v->avatar ?: '/assets/img/placeholder.jpg';
+            $avatar = $v->avatar ?: '/images/placeholder.jpg';
             $nickname = $v->nickname ?: $v->name;
             $str .=  <<<EOF
 <div class="media">

@@ -15,7 +15,7 @@
                             <a href="/">首页</a>
                         </li>
                         <li>
-                            <a href="{{ route('blog.category', $blog->category->name) }}">{{ $blog->category->name }}</a>
+                            <a href="{{ route('blog.category', $blog->category->name) }}">{{$blog->category->name}}</a>
                         </li>
                         <li class="active">{{ $blog->title }}</li>
                     </ul>
@@ -63,7 +63,7 @@
                     <div class="media media-post" id="comment_textarea">
                         <div class="alert alert-info">
                             1、上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif<br/>
-                            2、支持表情，使用方法请见 Emoji 自动补全来咯，可用的 Emoji 请见 :metal: :point_right: Emoji 列表  :star: :sparkles:
+                            2、支持表情，使用方法请见Emoji自动补全来咯，请见 :metal: :point_right: Emoji列表 :star: :sparkles:
                         </div>
                         <a class="pull-left author" href="#pablo">
                             <div class="avatar">
@@ -85,7 +85,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
-                                    <textarea class="form-control" required name="content" placeholder="写下你想说的话" rows="3"></textarea>
+                                    <textarea class="form-control" required name="content"
+                                              placeholder="写下你想说的话" rows="3"></textarea>
                                 </div>
                                 <div class="submit media-footer">
                                     <a target="_blank" href="/login/google">
@@ -103,7 +104,8 @@
                                             <i class="fa fa-github"></i>
                                         </span>
                                     </a>
-                                    <input type="button" class="btn btn-primary btn-round btn-wd pull-right" value="确定" id="submit-comment" />
+                                    <input type="button" class="btn btn-primary btn-round btn-wd pull-right"
+                                           value="确定" id="submit-comment" />
                                     <input type="button" style="display: none" class="btn btn-round btn-wd pull-right"
                                            value="取消回复" id="cancel-comment"/>
                                 </div>
@@ -114,11 +116,12 @@
                     <div class="media media-post" id="comment_textarea">
                         <div class="alert alert-info">
                             1、上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif<br/>
-                            2、支持表情，使用方法请见 Emoji 自动补全来咯，可用的 Emoji 请见 :metal: :point_right: Emoji 列表  :star: :sparkles:
+                            2、支持表情，使用方法请见Emoji自动补全来咯，请见 :metal: :point_right: Emoji列表 :star: :sparkles:
                         </div>
                         <a class="pull-left author" href="#pablo">
                             <div class="avatar">
-                                <img class="media-object" alt="64x64" src="{{ \Auth::user()->avatar ?: asset('/assets/img/placeholder.jpg') }}">
+                                <img class="media-object" alt="64x64"
+                                     src="{{ \Auth::user()->avatar ?: asset('/images/placeholder.jpg') }}">
                             </div>
                         </a>
                         <div class="media-body">
@@ -128,10 +131,12 @@
                                 <input type="hidden" name="user_id" value="{{\Auth::id()}}">
                                 <input type="hidden" name="parent_id" value="0">
                                 <div class="form-group label-floating">
-                                    <textarea class="form-control" required name="content" placeholder="写下你想说的话" rows="3"></textarea>
+                                    <textarea class="form-control" required name="content"
+                                              placeholder="写下你想说的话" rows="3"></textarea>
                                 </div>
                                 <div class="submit text-center">
-                                    <input type="button" class="btn btn-primary btn-round btn-wd pull-right" value="确定" id="submit-comment" />
+                                    <input type="button" class="btn btn-primary btn-round btn-wd pull-right"
+                                           value="确定" id="submit-comment" />
                                     <input type="button" style="display: none" class="btn btn-round btn-wd pull-right"
                                            value="取消回复" id="cancel-comment"/>
                                 </div>
