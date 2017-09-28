@@ -17,14 +17,13 @@ class ConfigController extends Controller
         } else {
             $data['messageLines'] = [];
         }
-
-        if($data['subject']){
-            $subject = '自得其乐主题： '.$data['subject'];
+        if(isset($data['subject']) && !empty($data['subject']) ){
+            $data['subject'] = '自得其乐主题： '.$data['subject'];
         } else {
-            $subject = '联系我们发来的信息，相关人员名字： '.$data['name'];
+            $data['subject'] = '联系我们发来的信息，相关人员名字： '.$data['name'];
         }
-        Mail::send('email', $data, function ($message) use ($data, $subject) {
-            $message->subject($subject)
+        Mail::send('email', $data, function ($message) use ($data) {
+            $message->subject($data['subject'])
                 ->to($this->email)
                 ->bcc($this->email163)
                 ->replyTo($data['email']);

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\FriendLink;
 use App\Menu;
 use App\Setting;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Redis;
 use View;
@@ -18,9 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //不能这样写  这样写  直接暴露出来表了  项目初始化 migrate时会报错
-        //$setting = Setting::first()->toArray();
-        //view()->share('bootstrapLine', $setting['bstable_line_count']);
+        //Carbon 设置中文  如 博客显示几个月前
+        Carbon::setLocale('zh');
 
         //Redis::flushAll();
         View::composer('*', function ($view) {
@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
                 $menu = json_decode($menu, true);
             }
             //友情链接
-            //Redis::del('friend_link');
             if (!Redis::exists('friend_link')) {
                 $linkdata = serialize(FriendLink::where('status', 1)
                     ->orderby('weight')->take(8)->get(['name', 'image', 'url'])->toArray());
@@ -49,7 +48,6 @@ class AppServiceProvider extends ServiceProvider
             }
             $friend_links = Redis::get('friend_link');
             $friend_links = unserialize($friend_links);
-            //页面随机诗文
             $view->with('setting', $setting);
             $view->with('menu', $menu);
             $view->with('friend_links', $friend_links);

@@ -10,7 +10,8 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<ul class="nav nav-pills nav-pills-primary">
-								<li class="{{ \Request::is('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}" >All</a></li>
+								<li class="{{ \Request::is('blogs') ? 'active' : '' }}">
+									<a href="{{ route('blogs') }}" >全部</a></li>
 								@foreach( $categories as $category)
 									<li class="{{ \Request::is('blog/category/'.$category.'/*') ? 'active' : '' }}">
 										<a href="{{ route('blog.category',['category'=>$category, 'flag'=>'flag' ]) }}">{{$category}}</a>

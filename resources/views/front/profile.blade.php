@@ -134,9 +134,9 @@
 									<div class="col-md-5">
 										<div class="card-image">
 											<a href="#pablo">
-												<img class="img" src="../assets/img/faces/avatar.jpg">
+												<img class="img" src="/images/placeholder.jpg">
 											</a>
-											<div class="colored-shadow" style="background-image: url(&quot;../assets/img/faces/avatar.jpg&quot;); opacity: 1;"></div></div>
+											<div class="colored-shadow" style="background-image: url(&quot;/images/placeholder.jpg&quot;); opacity: 1;"></div></div>
 									</div>
 									<div class="col-md-7">
 										<div class="card-content">

@@ -46,7 +46,7 @@
                     <li class="dropdown">
                         <a href="#pablo" class="profile-photo dropdown-toggle" data-toggle="dropdown">
                             <div class="profile-photo-small">
-                                <img src="{{ Auth::user()->avatar ?: '/images/faces/avatar.jpg'}}"
+                                <img src="{{ Auth::user()->avatar ?: '/images/placeholder.jpg'}}"
                                      title="{{ Auth::user()->name }}" class="img-circle img-responsive">
                             </div>
                         </a>

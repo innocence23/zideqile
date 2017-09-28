@@ -13,12 +13,13 @@
 								<div class="card card-raised card-background" style="background-image: url('{{ '/uploads/'.$v->image }}')">
 									<div class="card-content">
 										<h6 class="category text-info"></h6>
-										<h3 class="card-title">{{ $v->title }}</h3>
+										<h3 class="card-title">{{ $v->name }}</h3>
 										<p class="card-description">
 											{{ $v->desc }}
 										</p>
-										<a href="{{ route('blog', $v->slug)}}" title="{{ $v->title }}" class="btn btn-warning btn-round">
-											<i class="material-icons">subject</i> Read Article
+										<a href="{{ route('blog', $v->slug)}}" title="{{ $v->name }}"
+										   class="btn btn-warning btn-round">
+											<i class="material-icons">subject</i> 阅读
 										</a>
 									</div>
 								</div>
@@ -34,13 +35,13 @@
 									<div class="card-content">
 										<h6 class="category text-info"></h6>
 										<a href="{{ route('blog', $v->slug)}}">
-											<h3 class="card-title">{{ $v->title }}</h3>
+											<h3 class="card-title">{{ $v->name }}</h3>
 										</a>
 										<p class="card-description">
 											{{ $v->desc }}
 										</p>
-										<a href="{{ route('blog', $v->slug)}}" title="{{ $v->title }}" class="btn btn-danger btn-round">
-											<i class="material-icons">format_align_left</i> Read Article
+										<a href="{{ route('blog', $v->slug)}}" title="{{ $v->name }}" class="btn btn-danger btn-round">
+											<i class="material-icons">format_align_left</i> 阅读
 										</a>
 									</div>
 								</div>
@@ -65,11 +66,11 @@
 									</div>
 									<div class="content">
 										<h4 class="card-title">
-											<a href="{{ route('blog', $v->slug)}}">{{ $v->title }}</a>
+											<a href="{{ route('blog', $v->slug)}}">{{ $v->name }}</a>
 										</h4>
 										<p class="card-description">
 											{{ $v->desc }}
-											<a href="{{ route('blog', $v->slug)}}"> Read More </a>
+											<a href="{{ route('blog', $v->slug)}}"> 更多 </a>
 										</p>
 									</div>
 								</div>
