@@ -138,27 +138,6 @@ class IndexController extends Controller
     }
 
     /**
-     * 产品页
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function productList()
-    {
-        return view('front.product');
-    }
-
-    /**
-     * 产品详情
-     *
-     * @param Request $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function productInfo(Request $slug)
-    {
-        return view('front.product-info');
-    }
-
-    /**
      * 前台注册页面
      *
      * @return \Illuminate\Http\Response
@@ -271,9 +250,32 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function zhuantiInfo()
+    public function zhuantiInfo($id)
     {
-        $zhuanti = SinglePage::where('type', 5)->value('content');
+        $zhuanti = SinglePage::where(['type'=>5, 'status'=>1, 'id'=>$id])->value('content');
         return view('front.zhuanti-info', ['zhuanti'=>$zhuanti]);
     }
+
+
+    /**
+     * 产品页
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function productList()
+    {
+        return view('front.product');
+    }
+
+    /**
+     * 产品详情
+     *
+     * @param Request $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function productInfo(Request $slug)
+    {
+        return view('front.product-info');
+    }
+
 }
