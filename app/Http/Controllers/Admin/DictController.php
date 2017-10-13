@@ -159,7 +159,6 @@ class DictController extends Controller
             'bushou_id' => 'required',
             'cate_id' => 'required',
             'image' => 'required|image',
-            'yitizi' => 'required',
             'shuowen' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
@@ -168,7 +167,8 @@ class DictController extends Controller
         $file = $request->file('image');
         if($file->isValid()) {
             $res = $file->store(date('Y-m'), 'public');
-            Image::make(public_path('uploads/' . $res))->resize(500, 500)->save();
+            Image::make(public_path('uploads/' . $res))->resize(700, 80
+            )->save();
             $model->image = $res;
         }
         $data = $request->all();
@@ -218,7 +218,6 @@ class DictController extends Controller
             'bushou_id' => 'required',
             'cate_id' => 'required',
             'image' => 'image',
-            'yitizi' => 'required',
             'shuowen' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
@@ -235,7 +234,7 @@ class DictController extends Controller
                     }
                 }
                 $res = $file->store(date('Y-m'), 'public');
-                Image::make(public_path('uploads/' . $res))->resize(500, 500)->save();
+                Image::make(public_path('uploads/' . $res))->resize(700, 80)->save();
                 $model->image = $res;
             }
         }

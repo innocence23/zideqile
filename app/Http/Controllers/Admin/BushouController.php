@@ -19,10 +19,14 @@ class BushouController extends Controller
         $sort = $request->input('sort', 'id');
         $order = $request->input('order', 'desc');
         $name = $request->input('name', '');
+        $bihua = $request->input('bihua', '');
         $status = $request->input('status', '');
         $where = [];
         if(!empty($name)) {
             $where[] = ['name', 'like', '%'.$name.'%'];
+        }
+        if(!empty($bihua)) {
+            $where[] = ['bihua', '=', $bihua];
         }
         if(strlen($status) != 0) {
             $where[] = ['status', '=', $status];
@@ -68,6 +72,7 @@ class BushouController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:10|unique:bushous,name',
+            'bihua' => 'required',
         ]);
         $data = $request->all();
         $id = auth('admin')->user()->id;
@@ -88,6 +93,7 @@ class BushouController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:10|unique:bushous,name,'.$bushou->id,
+            'bihua' => 'required',
         ]);
         $model = $bushou;
         $data = $request->all();

@@ -15,6 +15,7 @@ class CreateBushousTable extends Migration
     {
         Schema::create('bushous', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('bihua')->default(0);
             $table->string('name', 5)->unique();
             $table->string('desc', 60);
             $table->integer('created_by')->unsigned();

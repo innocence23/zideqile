@@ -30,6 +30,10 @@
                                     <input type="text" class="form-control" id="search-name" placeholder="名称" name="search-name">
                                 </div>
                                 <div class="form-group">
+                                    <label for="search-bihua">笔画</label>
+                                    <input type="text" class="form-control" id="search-bihua" placeholder="笔画" name="search-bihua">
+                                </div>
+                                <div class="form-group">
                                     <label for="search-status">状态</label>
                                     <select class="form-control" id="search-status" name="search-status">
                                         <option value="">请选择</option>
@@ -64,6 +68,11 @@
                                 <label for="bushou-name" class="control-label">名称:</label>
                                 <input type="text" class="form-control" name="name"  id="bushou-name" required ng-model="bushou.name">
                                 <p ng-show="!myForm.name.$pristine && myForm.name.$invalid" class="help-block">不能为空</p>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : !myForm.bihua.$pristine && myForm.bihua.$invalid }">
+                                <label for="bushou-bihua" class="control-label">笔画:</label>
+                                <input type="text" class="form-control" name="bihua"  id="bushou-bihua" required ng-model="bushou.bihua">
+                                <p ng-show="!myForm.bihua.$pristine && myForm.bihua.$invalid" class="help-block">不能为空</p>
                             </div>
                             <div class="form-group">
                                 <label for="bushou-desc" class="control-label">描述:</label>
@@ -120,6 +129,7 @@
                                 order: params.order,
                                 sort: params.sort,
                                 name: $("#search-name").val(),
+                                bihua: $("#search-bihua").val(),
                                 status: $("#search-status").val()
                                 //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果 queryParamsType = 'limit' ,返回参数必须包含
                                 //limit, offset, search, sort, order 否则, 需要包含: pageSize, pageNumber, searchText, sortName, sortOrder. 返回false将会终止请求
@@ -140,6 +150,11 @@
                             }, {
                                 field: 'name',
                                 title: '名称',
+                                valign: 'middle',
+                                sortable: true
+                            }, {
+                                field: 'bihua',
+                                title: '笔画',
                                 valign: 'middle',
                                 sortable: true
                             }, {

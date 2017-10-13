@@ -144,6 +144,9 @@ Route::group([], function () {
     Route::get('/', 'IndexController@index')->name('index');
     Route::get('/home', 'IndexController@index')->name('home');
 
+    Route::get('dict/{dict}', 'IndexController@dict')->name('dict');
+    Route::get('dict-index', 'IndexController@dictIndex')->name('dict-index');
+
     Route::get('blog/{blog}', 'IndexController@blog')->name('blog');
     Route::get('blog/tag/{tag}', 'IndexController@blogTag')->name('blog.tag');
     Route::get('blog/category/{category}/{flag?}', 'IndexController@blogCategory')->name('blog.category');

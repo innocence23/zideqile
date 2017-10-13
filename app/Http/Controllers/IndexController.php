@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Bushou;
 use App\Carousel;
 use App\Category;
+use App\Dict;
+use App\Pinyin;
 use App\Post;
 use App\SinglePage;
 use App\Tag;
@@ -24,6 +27,56 @@ class IndexController extends Controller
     {
         $carousels = Carousel::where('status', 1)->get();
         return view('front.index', ['carousels'=>$carousels]);
+    }
+
+
+    /**
+     * 字典检索
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dictIndex()
+    {
+        $pinyins = $bushous = [];
+        $py = Pinyin::where('status',1)->pluck('first', 'name')->toArray();
+        foreach ($py as $k=>$v) {
+            $pinyins[$v][] = $k;
+        }
+        $bs = Bushou::where('status',1)->pluck('bihua', 'name')->toArray();
+        foreach ($bs as $k=>$v) {
+            $bushous[$v][] = $k;
+        }
+        $tags = Tag::where('status',1)->pluck('name');
+        return view('front.dict-index', ['pinyins'=>$pinyins, 'bushous'=>$bushous, 'tags'=>$tags]);
+    }
+
+    /**
+     * 字典详情
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dict($slug)
+    {
+        $dict = Dict::whereSlug($slug)->firstOrFail();
+        //有用到tag 弥补缺陷
+        $tag_ids = array_pluck($dict->tags->toArray(), 'pivot.tag_id');
+        $tag_dict_ids = \DB::table('taggables')
+            ->whereIn('tag_id', $tag_ids)
+            ->where('taggable_type', 'App\Dict')->pluck('taggable_id')->toArray();
+        $tag_dict_ids = array_unique($tag_dict_ids);
+        //相关类似文章推荐
+        $similarDicts = Dict::select(['fanti', 'slug', 'image'])->where([
+            ['cate_id',$dict->cate_id],
+            ['id', '!=', $dict->id],
+        ])->whereIn('id', $tag_dict_ids)->orderBy(\DB::raw('RAND()'))->limit(3)->get();
+
+        //存访问量
+        Redis::pipeline(function ($pipe) use($dict) {
+            Redis::incr('dict_'.$dict->id.'_view');
+            Redis::zincrby('dict_view', 1, 'dict_'.$dict->id);
+        });
+        $viewcount = Redis::get('dict_'.$dict->id.'_view');
+
+        return view('front.dict', ['dict'=>$dict, 'viewcount'=>$viewcount, 'similarDicts'=>$similarDicts]);
     }
 
     /**

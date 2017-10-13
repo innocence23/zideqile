@@ -8,8 +8,17 @@ class Dict extends Model
 {
     protected $fillable = ['jianti', 'fanti', 'slug', 'pinyin', 'bushou_id', 'cate_id', 'image', 'yitizi',
         'shuowen', 'jieshi', 'cizu', 'created_by', 'updated_by', 'status'];
+
     public function user(){
         return $this->hasOne('App\Admin', 'id', 'created_by');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bushou()
+    {
+        return $this->belongsTo('App\Bushou', 'bushou_id');
     }
 
     /**

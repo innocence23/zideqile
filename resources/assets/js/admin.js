@@ -9,8 +9,6 @@ require('sweetalert');
 require('@fancyapps/fancybox');
 require('bootstrap-fileinput');
 require('../plugins/bootstrap-table-angular-custom');
-
-
 require('./self-admin');
 
 

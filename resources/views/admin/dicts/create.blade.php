@@ -87,10 +87,9 @@
                                 <input type="text" class="form-control" name="shuowen" id="shuowen" required ng-model="dict.shuowen">
                                 <p ng-show="myForm.shuowen.$dirty && myForm.shuowen.$invalid" class="help-block">不能为空</p>
                             </div>
-                            <div class="form-group"  ng-class="{ 'has-error' : myForm.yitizi.$dirty && myForm.yitizi.$invalid }">
+                            <div class="form-group">
                                 <label for="yitizi" class="control-label">异体字:</label>
-                                <input type="text" class="form-control" name="yitizi" id="yitizi" required ng-model="dict.yitizi">
-                                <p ng-show="myForm.yitizi.$dirty && myForm.yitizi.$invalid" class="help-block">不能为空</p>
+                                <input type="text" class="form-control" name="yitizi" id="yitizi" ng-model="dict.yitizi">
                             </div>
                             <div class="form-group <?php if($errors->has('jieshi')) echo 'has-error';?>" >
                                 <label for="jieshi" class="control-label">解释:</label>

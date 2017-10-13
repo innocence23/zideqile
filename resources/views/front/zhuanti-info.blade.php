@@ -6,9 +6,9 @@
 	<div class="main main-raised">
 		<div class="container">
 			<h2 class="title">专题</h2>
-
 			{!! $zhuanti !!}
 
+			<br/><br/>
 		</div>
 	</div>
 @endsection

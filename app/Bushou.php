@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bushou extends Model
 {
-    protected $fillable = ['name', 'desc', 'created_by', 'updated_by', 'status'];
+    protected $fillable = ['bihua', 'name', 'desc', 'created_by', 'updated_by', 'status'];
 }
