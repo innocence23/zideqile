@@ -46,7 +46,7 @@
                                     <td class="text-center">{{$k}}</td>
                                     <td class="text-left">
                                     @foreach( $pinyin as $val)
-                                        <a href="/zidian/py/za.html" target="_blank" >{{$val}}</a>
+                                        <a href="{{route('dict-type', ['pinyin', $val])}}" target="_blank" >{{$val}}</a>
                                     @endforeach
                                     </td>
                                 </tr>
@@ -64,7 +64,7 @@
                                         <td class="text-center">{{$k}}</td>
                                         <td class="text-left">
                                             @foreach( $bushou as $val)
-                                                <a href="/zidian/py/za.html" target="_blank" >{{$val}}</a>
+                                                <a href="{{route('dict-type', ['bushou', $val['id']])}}" target="_blank" >{{$val['name']}}</a>
                                             @endforeach
                                         </td>
                                     </tr>
@@ -75,9 +75,9 @@
                     </div>
                     <div class="tab-pane" id="settings">
                         <ul class="list-group">
-                            @foreach( $tags as $tag)
+                            @foreach( $tags as $key=>$tag)
                                 <li class="list-group-item">
-                                    <a href="/zidian/py/za.html" target="_blank" >{{$tag}}</a>
+                                    <a href="{{route('dict-type', ['tag', $key])}}" target="_blank" >{{$tag}}</a>
                                 </li>
                             @endforeach
                         </ul>

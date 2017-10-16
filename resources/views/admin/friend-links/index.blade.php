@@ -211,8 +211,7 @@
                             title: '网站log',
                             valign: 'middle',
                             formatter: function (value, row, index) {
-                                return '<a class="example-image" href="/uploads/'+value+'" data-lightbox="example-1">' +
-                                    '<img src="/uploads/'+value+'" alt="Girl looking out people on beach" width="60px" height="60px"></a>';
+                                return '<a data-fancybox href="/uploads/'+value+'"><image width="40px" height="40px" title="'+row.shuowen+'" src="/uploads/'+value+'" /></a>';
                             }
                         },{
                             field: 'weight',

@@ -79,6 +79,10 @@
                                 <p ng-show="myForm['tags[]'].$dirty && myForm['tags[]'].$invalid" class="help-block">不能为空</p>
                             </div>
                             <div class="form-group">
+                                <label for="zitu" class="control-label">汉字图片:</label>
+                                <input type="file" class="form-control" name="zitu" id="zitu" ng-model="dict.zitu">
+                            </div>
+                            <div class="form-group">
                                 <label for="image" class="control-label">甲骨文:</label>
                                 <input type="file" class="form-control" name="image" id="image" ng-model="dict.image">
                             </div>
@@ -119,6 +123,11 @@
             showUpload: false,
             allowedFileExtensions: ['jpg','jpeg', 'png', 'gif']
         });
+        $("#zitu").fileinput({
+            language: 'zh',
+            showUpload: false,
+            allowedFileExtensions: ['jpg','jpeg', 'png', 'gif']
+        });
         CKEDITOR.replace( 'editor1', {
             extraPlugins: 'uploadimage,image2',
             language: 'zh-cn',
@@ -148,6 +157,7 @@
                     'pinyin':'',
                     'bushou_id': "",
                     'cate_id':'',
+                    'zitu':'',
                     'image':'',
                     'yitizi':'',
                     'shuowen':'',

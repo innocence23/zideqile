@@ -81,6 +81,10 @@
                                 <p ng-show="myForm['tags[]'].$dirty && myForm['tags[]'].$invalid" class="help-block">不能为空</p>
                             </div>
                             <div class="form-group">
+                                <label for="zitu" class="control-label">汉字图片:</label>
+                                <input type="file" class="form-control" name="zitu" id="zitu" ng-model="dict.zitu">
+                            </div>
+                            <div class="form-group">
                                 <label for="image" class="control-label">甲骨文:</label>
                                 <input type="file" class="form-control" name="image" id="image" ng-model="dict.image">
                             </div>
@@ -156,6 +160,16 @@
                         ],
                         initialPreviewAsData: true,
                         initialCaption: response.data.image
+                    });
+                    $("#zitu").fileinput({
+                        language: 'zh',
+                        showUpload: false,
+                        allowedFileExtensions: ['jpg','jpeg', 'png', 'gif'],
+                        initialPreview: [
+                            '/uploads/'+response.data.zitu
+                        ],
+                        initialPreviewAsData: true,
+                        initialCaption: response.data.zitu
                     });
                 }, function errorCallback(response) {
                     swal("错误", '服务数据异常', "error", {timer: 2000});

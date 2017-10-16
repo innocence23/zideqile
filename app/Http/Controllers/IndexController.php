@@ -29,6 +29,24 @@ class IndexController extends Controller
         return view('front.index', ['carousels'=>$carousels]);
     }
 
+    /**
+     * 字典检索搜索
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dictType($type, $search)
+    {
+        $res = '';
+        if($type == 'pinyin'){
+            $res = Dict::where(['status'=>'1', 'pinyin'=>$search])->get(['jianti', 'fanti', 'pinyin', 'slug']);
+        } elseif($type == 'bushou'){
+            $res = Dict::where(['status'=>'1', 'bushou_id'=>$search])->get(['jianti', 'fanti', 'pinyin', 'slug']);
+        } elseif($type == 'tag'){
+            $res = Tag::find($search)->dicts()->get(['jianti', 'fanti', 'pinyin', 'slug']);
+        }elseif($type == 'cate'){
+            $res = Dict::where(['status'=>'1', 'cate_id'=>$search])->get(['jianti', 'fanti', 'pinyin', 'slug']);
+        }
+        return view('front.dict-type', ['data'=>$res]);
+    }
 
     /**
      * 字典检索
@@ -41,11 +59,11 @@ class IndexController extends Controller
         foreach ($py as $k=>$v) {
             $pinyins[$v][] = $k;
         }
-        $bs = Bushou::where('status',1)->pluck('bihua', 'name')->toArray();
+        $bs = Bushou::where('status',1)->get(['id','bihua', 'name'])->toArray();
         foreach ($bs as $k=>$v) {
-            $bushous[$v][] = $k;
+            $bushous[$v['bihua']][] = $v;
         }
-        $tags = Tag::where('status',1)->pluck('name');
+        $tags = Tag::where('status',1)->pluck('name', 'id');
         return view('front.dict-index', ['pinyins'=>$pinyins, 'bushous'=>$bushous, 'tags'=>$tags]);
     }
 

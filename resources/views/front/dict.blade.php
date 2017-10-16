@@ -16,8 +16,7 @@
                             <a href="/">首页</a>
                         </li>
                         <li>
-                            {{--<a href="{{ route('dict.category', $dict->category->name) }}">{{$dict->category->name}}</a>--}}
-                            <a href="">{{$dict->category->name}}</a>
+                            <a href="{{route('dict-type', ['cate', $dict->category->id])}}">{{$dict->category->name}}</a>
                         </li>
                         <li class="active">{{ $dict->fanti }}</li>
                     </ul>
@@ -30,10 +29,8 @@
                             <span> 阅：{{$viewcount}}  </span>&nbsp;&nbsp;
                         </span>
                         <span class="fa fa-folder-open-o">
-                            {{--<a href="{{ route('dict.category', $dict->category->name) }}" >--}}
-                            {{--{{ $dict->category->name }}</a>&nbsp;&nbsp;</span>                            --}}
-                            <a href="">
-                                {{ $dict->category->name }}</a>&nbsp;&nbsp;
+                            <a href="{{route('dict-type', ['cate', $dict->category->id])}}">
+                                {{$dict->category->name}}</a>&nbsp;&nbsp;
                         </span>
                         <span class="fa fa-comments-o">
                             <a href="#maodian-comments"> {{ $dict->comments()->count() }} 条评论</a>&nbsp;&nbsp;
@@ -45,20 +42,45 @@
                     <div class="row">
                         <div class="col-md-9 dict-border">
                             <div class="card card-plain">
-                                <div class="col-md-3">
+                                <div class="col-sm-3">
                                     <div class="dict-img">
                                         <div class="dict-title">{{$dict->fanti}}</div>
                                     </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-md-4"><strong>拼 音</strong><span>{{$dict->pinyin}}</span></div>
-                                        <div class="col-md-4"><strong>简 体</strong><span>{{$dict->fanti}}</span></div>
-                                        <div class="col-md-4"><strong>繁 体</strong><span>{{$dict->jianti}}</span></div>
+                                <div class="col-sm-3">
+                                    <div class="dict-zitu">
+                                        <a data-fancybox class="card-image" href="{{'/uploads/'.$dict->zitu}}">
+                                            <img src="{{'/uploads/'.$dict->zitu}}"
+                                                 alt="{{$dict->fanti}}" class="img-rounded">
+                                        </a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4"><strong>部 首</strong><span>{{$dict->bushou->name}}</span></div>
-                                        <div class="col-md-4"><strong>异体字</strong><span>{{$dict->yitizi}}</span></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <td width="20%">拼 音</td>
+                                                <td>
+                                                    <strong><a href="{{route('dict-type', ['pinyin', $dict->pinyin])}}">{{$dict->pinyin}}</a></strong>
+                                                </td>
+                                                <td width="20%">简 体</td>
+                                                <td><strong>{{$dict->fanti}}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">繁 体</td>
+                                                <td><strong>{{$dict->jianti}}</strong></td>
+                                                <td width="20%">部 首</td>
+                                                <td>
+                                                    <strong><a href="{{route('dict-type', ['bushou', $dict->bushou->id])}}">{{$dict->bushou->name}}</a></strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">异体字</td>
+                                                <td colspan="3"><strong>{{$dict->yitizi}}</strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -154,9 +176,9 @@
             <div class="section-blog-info">
                 <div class="blog-tags">
                     <strong>Tags:</strong>
-                    {{--@foreach($dict->tags as $tag)--}}
-                    {{--<a href="{{ route('dict.tag', $tag->name) }}" class="label btn btn-default">{{$tag->name}}</a>--}}
-                    {{--@endforeach--}}
+                    @foreach($dict->tags as $tag)
+                    <a href="{{route('dict-type', ['tag', $tag->id])}}" class="label btn btn-default">{{$tag->name}}</a>
+                    @endforeach
                 </div>
             </div>
 
@@ -279,6 +301,10 @@
         }
         .blog-post .section-text p {
             font-size: 14px !important;
+        }
+        div.dict-zitu {
+            width: 150px;
+            height: 150px;
         }
         div.dict-img {
             width: 100px;

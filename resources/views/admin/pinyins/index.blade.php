@@ -2,12 +2,12 @@
 
 @extends('adminlte::page')
 
-@section('title', '部首管理')
+@section('title', '拼音管理')
 
 @section('content_header')
-    <h1>部首管理</h1>
+    <h1>拼音管理</h1>
     <ol class="breadcrumb">
-        <li class="active">部首管理</li>
+        <li class="active">拼音管理</li>
     </ol>
 @stop
 
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        部首管理
+                        拼音管理
                         <button type="button" class="btn btn-info" style="margin: -6px;float: right;" ng-click="toggle('add')">
                             <i class="glyphicon glyphicon-plus"></i> 新建
                         </button>
@@ -30,8 +30,8 @@
                                     <input type="text" class="form-control" id="search-name" placeholder="名称" name="search-name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="search-bihua">笔画</label>
-                                    <input type="text" class="form-control" id="search-bihua" placeholder="笔画" name="search-bihua">
+                                    <label for="search-first">索引</label>
+                                    <input type="text" class="form-control" id="search-first" placeholder="A" name="search-first">
                                 </div>
                                 <div class="form-group">
                                     <label for="search-status">状态</label>
@@ -65,18 +65,14 @@
                     <div class="modal-body">
                         <form name="myForm" id="form1" novalidate>
                             <div class="form-group" ng-class="{ 'has-error' : !myForm.name.$pristine && myForm.name.$invalid }">
-                                <label for="bushou-name" class="control-label">名称:</label>
-                                <input type="text" class="form-control" name="name"  id="bushou-name" required ng-model="bushou.name">
+                                <label for="pinyin-name" class="control-label">名称:</label>
+                                <input type="text" class="form-control" name="name"  id="pinyin-name" required ng-model="pinyin.name">
                                 <p ng-show="!myForm.name.$pristine && myForm.name.$invalid" class="help-block">不能为空</p>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : !myForm.bihua.$pristine && myForm.bihua.$invalid }">
-                                <label for="bushou-bihua" class="control-label">笔画:</label>
-                                <input type="text" class="form-control" name="bihua"  id="bushou-bihua" required ng-model="bushou.bihua">
-                                <p ng-show="!myForm.bihua.$pristine && myForm.bihua.$invalid" class="help-block">不能为空</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="bushou-desc" class="control-label">描述:</label>
-                                <input type="text" class="form-control" name="desc"  id="bushou-desc" ng-model="bushou.desc">
+                            <div class="form-group" ng-class="{ 'has-error' : !myForm.first.$pristine && myForm.first.$invalid }">
+                                <label for="pinyin-first" class="control-label">索引:</label>
+                                <input type="text" class="form-control" name="first"  id="pinyin-first" required ng-model="pinyin.first">
+                                <p ng-show="!myForm.first.$pristine && myForm.first.$invalid" class="help-block">不能为空</p>
                             </div>
                         </form>
                     </div>
@@ -129,7 +125,7 @@
                                 order: params.order,
                                 sort: params.sort,
                                 name: $("#search-name").val(),
-                                bihua: $("#search-bihua").val(),
+                                first: $("#search-first").val(),
                                 status: $("#search-status").val()
                                 //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果 queryParamsType = 'limit' ,返回参数必须包含
                                 //limit, offset, search, sort, order 否则, 需要包含: pageSize, pageNumber, searchText, sortName, sortOrder. 返回false将会终止请求
@@ -141,7 +137,7 @@
                         pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
                         clickToSelect: true,                //是否启用点击选中行
                         uniqueId: "id",                     //每一行的唯一标识，一般为主键列
-                        url: "{{route('bushou.lists')}}",
+                        url: "{{route('pinyin.lists')}}",
                         columns: [{
                                 field: 'id',
                                 title: 'ID',
@@ -153,14 +149,10 @@
                                 valign: 'middle',
                                 sortable: true
                             }, {
-                                field: 'bihua',
-                                title: '笔画',
+                                field: 'first',
+                                title: '索引',
                                 valign: 'middle',
                                 sortable: true
-                            }, {
-                                field: 'desc',
-                                title: ' 描述',
-                                valign: 'middle',
                             }, {
                                 field: 'created_at',
                                 title: '创建时间',
@@ -187,7 +179,7 @@
 
                 //搜索按钮事件
                 $scope.btnquery = function () {
-                    $("#table").bootstrapTable('refresh', {url: "{{route('bushou.lists')}}"});
+                    $("#table").bootstrapTable('refresh', {url: "{{route('pinyin.lists')}}"});
                     //主要解决在不是第一页搜索的情况下 如在第二页搜索搜索不到数据，但其实第一页是有数据的
                 };
                 //回车搜索事件
@@ -206,7 +198,7 @@
                     }).then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/admin/bushou/' + id,
+                                url: '/admin/pinyin/' + id,
                                 type: 'POST',
                                 data: {
                                     status: status,
@@ -236,14 +228,14 @@
                     switch (modalstate) {
                         case 'add':
                             $scope.form_title = "新建";
-                            $scope.bushou = {};
+                            $scope.pinyin = {};
                             break;
                         case 'edit':
                             $scope.form_title = "修改--" + id;
                             $scope.id = id;
-                            $http.get('/admin/bushou/' + id)
+                            $http.get('/admin/pinyin/' + id)
                                 .then(function successCallback(response) {
-                                    $scope.bushou = response.data;
+                                    $scope.pinyin = response.data;
                                 });
                             break;
                         default:
@@ -254,8 +246,8 @@
 
                 //添加和修改保存记录
                 $scope.save = function (modalstate, id) {
-                    var url = "{{route('bushou.store')}}";
-                    var dataparam = $.param($scope.bushou);
+                    var url = "{{route('pinyin.store')}}";
+                    var dataparam = $.param($scope.pinyin);
                     if (modalstate === 'edit') {
                         url += '/' + id;
                         dataparam += '&_method=put';
@@ -271,7 +263,7 @@
                         if (modalstate === 'edit') { //修改时刷新当前页
                             $("#table").bootstrapTable('refresh');
                         } else { //添加时刷新返回的第一页
-                            $("#table").bootstrapTable('refresh', {url: "{{route('bushou.lists')}}"});
+                            $("#table").bootstrapTable('refresh', {url: "{{route('pinyin.lists')}}"});
                         }
                     }, function errorCallback(response) {
                         var errorMsg = '';

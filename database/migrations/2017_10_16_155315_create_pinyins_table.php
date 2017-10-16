@@ -13,8 +13,11 @@ class CreatePinyinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pinyin', function (Blueprint $table) {
+        Schema::create('pinyins', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('first', 1);
+            $table->string('name', 5)->unique();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePinyinsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pinyin');
+        Schema::dropIfExists('pinyins');
     }
 }

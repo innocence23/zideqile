@@ -168,11 +168,18 @@
                 title: 'Tags',
                 valign: 'middle'
             }, {
+                field: 'zitu',
+                title: '汉字图片',
+                valign: 'middle',
+                formatter:  function (value, row, index) {
+                    return '<a data-fancybox href="/uploads/'+value+'"><image width="40px" height="40px" title="'+row.shuowen+'" src="/uploads/'+value+'" /></a>'
+                }
+            },{
                 field: 'image',
                 title: '甲骨图片',
                 valign: 'middle',
                 formatter:  function (value, row, index) {
-                    return '<image width="40px" height="40px" title="'+ row.shuowen +'" src="/uploads/'+value+'" />';
+                    return '<a data-fancybox href="/uploads/'+value+'"><image width="40px" height="40px" title="'+row.shuowen+'" src="/uploads/'+value+'" /></a>'
                 }
             }, {
                 field: 'created_at',

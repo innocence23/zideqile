@@ -159,20 +159,27 @@ class DictController extends Controller
             'bushou_id' => 'required',
             'cate_id' => 'required',
             'image' => 'required|image',
+            'zitu' => 'image',
             'shuowen' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
         ]);
         $model = new Dict();
+        $data = $request->all();
         $file = $request->file('image');
         if($file->isValid()) {
             $res = $file->store(date('Y-m'), 'public');
             Image::make(public_path('uploads/' . $res))->resize(700, 80
             )->save();
-            $model->image = $res;
+            $data['image'] = $res;
         }
-        $data = $request->all();
-        if (isset($res)) $data['image'] = $res;
+        $file = $request->file('zitu');
+        if($file->isValid()) {
+            $res = $file->store('zitu', 'public');
+            Image::make(public_path('uploads/' . $res))->resize(500, 500
+            )->save();
+            $data['zitu'] = $res;
+        }
         $data['bushou_id'] = explode(':', $request->input('bushou_id', 0))[1];
         $data['cate_id'] = explode(':', $request->input('cate_id', 0))[1];
         $id = auth('admin')->user()->id;
@@ -218,12 +225,14 @@ class DictController extends Controller
             'bushou_id' => 'required',
             'cate_id' => 'required',
             'image' => 'image',
+            'zitu' => 'image',
             'shuowen' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
         ]);
 
         $model = $dict;
+        $data = $request->all();
         if($request->hasFile('image')){
             $file = $request->file('image');
             if($file->isValid()) {
@@ -235,11 +244,23 @@ class DictController extends Controller
                 }
                 $res = $file->store(date('Y-m'), 'public');
                 Image::make(public_path('uploads/' . $res))->resize(700, 80)->save();
-                $model->image = $res;
+                $data['image'] = $res;
             }
         }
-        $data = $request->all();
-        if (isset($res)) $data['image'] = $res;
+        if($request->hasFile('zitu')){
+            $file = $request->file('zitu');
+            if($file->isValid()) {
+                //如果跟新了图片就删除就图片
+                if ($request->input('zitu') != $model->zitu) {
+                    if (file_exists(public_path(). '/uploads/' .$model->zitu)) {
+                        unlink(public_path(). '/uploads/' .$model->zitu);
+                    }
+                }
+                $res = $file->store('zitu', 'public');
+                Image::make(public_path('uploads/' . $res))->resize(500, 500)->save();
+                $data['zitu'] = $res;
+            }
+        }
         $data['bushou_id'] = explode(':', $request->input('bushou_id', 0))[1];
         $data['cate_id'] = explode(':', $request->input('cate_id', 0))[1];
         $data['updated_by'] = auth('admin')->user()->id;

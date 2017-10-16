@@ -65,6 +65,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth
         ['index', 'store', 'update', 'show']
     ]);
 
+    //拼音
+    Route::get('pinyin/lists', 'PinyinController@getLists')->name('pinyin.lists');
+    Route::post('pinyin/{pinyin}', 'PinyinController@disable')->name('pinyin.disable');
+    Route::resource('pinyin', 'PinyinController', ['only' =>
+        ['index', 'store', 'update', 'show']
+    ]);
+
     //字典
     Route::get('dict/lists', 'DictController@getLists')->name('dict.lists');
     Route::get('dict/catetag', 'DictController@cateAndBushou')->name('dict.catebushou');
@@ -146,6 +153,7 @@ Route::group([], function () {
 
     Route::get('dict/{dict}', 'IndexController@dict')->name('dict');
     Route::get('dict-index', 'IndexController@dictIndex')->name('dict-index');
+    Route::get('dict-type/{type}/{search}', 'IndexController@dictType')->name('dict-type');
 
     Route::get('blog/{blog}', 'IndexController@blog')->name('blog');
     Route::get('blog/tag/{tag}', 'IndexController@blogTag')->name('blog.tag');

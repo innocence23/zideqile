@@ -210,8 +210,7 @@
                             title: '网站log',
                             valign: 'middle',
                             formatter: function (value, row, index) {
-                                return '<a href="/uploads/'+value+'" data-fancybox data-caption="'+row.name+'">' +
-                                    '<img src="/uploads/'+value+'" alt="'+row.name+'" width="60px" height="60px"></a>';
+                                return '<a data-fancybox href="/uploads/'+value+'"><image width="40px" height="40px" title="'+row.name+'" src="/uploads/'+value+'" /></a>';
                             }
                         },{
                             field: 'weight',

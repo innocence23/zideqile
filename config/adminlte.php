@@ -133,6 +133,11 @@ return [
         ],
         '字典管理',
         [
+            'text' => '拼音管理',
+            'url'  => '/admin/pinyin/',
+            'icon' => 'fa fa-quora',
+        ],
+        [
             'text' => '部首管理',
             'url'  => '/admin/bushou/',
             'icon' => 'star-half-o',
@@ -142,6 +147,7 @@ return [
             'url'  => '/admin/dict/',
             'icon' => 'book',
         ],
+        '评论管理',
         [
             'text' => '评论管理',
             'url'  => '/admin/comment/',

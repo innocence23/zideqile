@@ -17,7 +17,7 @@ class CreateBushousTable extends Migration
             $table->increments('id');
             $table->tinyInteger('bihua')->default(0);
             $table->string('name', 5)->unique();
-            $table->string('desc', 60);
+            $table->string('desc', 60)->default('');
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->tinyInteger('status')->default(1);
