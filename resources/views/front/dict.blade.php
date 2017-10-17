@@ -42,12 +42,12 @@
                     <div class="row">
                         <div class="col-md-9 dict-border">
                             <div class="card card-plain">
-                                <div class="col-sm-3">
+                                <div class="col-md-3 col-xs-6">
                                     <div class="dict-img">
                                         <div class="dict-title">{{$dict->fanti}}</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-md-3 col-xs-6">
                                     <div class="dict-zitu">
                                         <a data-fancybox class="card-image" href="{{'/uploads/'.$dict->zitu}}">
                                             <img src="{{'/uploads/'.$dict->zitu}}"
@@ -55,7 +55,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-md-6 col-xs-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <tbody>
@@ -127,46 +127,14 @@
                         <div class="col-md-3">
                             <div class="lead">相关字</div>
                             <div class="row">
-                                <div class="col-xs-6 card-profile">
+                                <?php $arr = range(0,5);?>
+                                @foreach($arr as $v)
+                                <div class="col-xs-4 col-md-6 card-profile">
                                     <div class="dict-img">
                                         <div class="dict-title">天</div>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -303,8 +271,8 @@
             font-size: 14px !important;
         }
         div.dict-zitu {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
         }
         div.dict-img {
             width: 100px;

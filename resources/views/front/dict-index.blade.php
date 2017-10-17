@@ -7,7 +7,7 @@
 @section('main-content')
     <div class="content">
         <div class="card card-nav-tabs">
-            <div class="header header-info">
+            <div class="header header-primary">
                 <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
@@ -15,20 +15,20 @@
                             <li class="active">
                                 <a href="#profile" data-toggle="tab" aria-expanded="true">
                                     <i class="material-icons">local_florist</i>
-                                    按偏旁检索
+                                    偏旁检索
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
                             <li>
                                 <a href="#messages" data-toggle="tab" aria-expanded="false">
                                     <i class="material-icons">local_library</i>
-                                    按拼音检索
+                                    拼音检索
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#settings" data-toggle="tab" aria-expanded="false">
                                     <i class="material-icons">local_offer</i>
-                                    按TAG检索
+                                    TAG检索
                                 </a>
                             </li>
                         </ul>
@@ -38,26 +38,23 @@
             <div class="card-content">
                 <div class="tab-content text-center">
                     <div class="tab-pane active" id="profile">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tbody>
-                                @foreach( $pinyins as $k=>$pinyin)
-                                <tr>
-                                    <td class="text-center">{{$k}}</td>
-                                    <td class="text-left">
-                                    @foreach( $pinyin as $val)
-                                        <a href="{{route('dict-type', ['pinyin', $val])}}" target="_blank" >{{$val}}</a>
-                                    @endforeach
-                                    </td>
-                                </tr>
+                        <table class="table table-bordered">
+                            <tbody>
+                            @foreach( $pinyins as $k=>$pinyin)
+                            <tr>
+                                <td class="text-center">{{$k}}</td>
+                                <td class="text-left">
+                                @foreach( $pinyin as $val)
+                                    <a href="{{route('dict-type', ['pinyin', $val])}}" target="_blank" >{{$val}}</a>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane" id="messages">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+                        <table class="table table-bordered">
                                 <tbody>
                                 @foreach( $bushous as $k=>$bushou)
                                     <tr>
@@ -71,7 +68,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        </div>
                     </div>
                     <div class="tab-pane" id="settings">
                         <ul class="list-group">
@@ -81,7 +77,6 @@
                                 </li>
                             @endforeach
                         </ul>
-
                     </div>
                 </div>
             </div>
@@ -91,8 +86,14 @@
 
 @section('css')
     <style rel="stylesheet">
-        .card-content a {
-            margin-right: 25px;
+        .nav.nav-tabs a {
+            padding: 10px;
+        }
+        .table.table-bordered a {
+            margin-right: 20px;
+        }
+        .card-nav-tabs {
+            margin-top: 25px !important;
         }
     </style>
 @endsection

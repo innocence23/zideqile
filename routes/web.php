@@ -176,7 +176,7 @@ Route::group([], function () {
     Route::get('single', 'IndexController@zhuanti')->name('zhuanti');
     Route::get('single/{single_page}', 'IndexController@zhuantiInfo')->name('zhuanti-info');
 
-    Route::get('search', 'IndexController@search')->name('search');
+    Route::get('result', 'IndexController@result')->name('result');
 
     Route::get('products', 'IndexController@productList')->name('product');
     Route::get('products/{slug}', 'IndexController@productInfo')->name('product-info');
@@ -184,5 +184,4 @@ Route::group([], function () {
     Route::get('profile', 'IndexController@profile')->name('profile');
     Route::get('app', 'IndexController@app')->name('app');
 
-    //Route::get('test', 'IndexController@test')->name('test');
 });

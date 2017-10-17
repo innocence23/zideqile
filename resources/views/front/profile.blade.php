@@ -3,233 +3,115 @@
 @section('html_title', '个人主页')
 
 @section('main-content')
-	<div class="main main-raised">
-		<div class="profile-content">
-			<div class="container">
-
-				<div class="row">
-					<div class="text-center">
-						<div class="profile">
-							<div class="name">
-								<h3 class="title">Christian Louboutin</h3>
-								<h6>Designer</h6>
-								<a href="#pablo" class="btn btn-just-icon btn-simple btn-dribbble"><i class="fa fa-dribbble"></i></a>
-								<a href="#pablo" class="btn btn-just-icon btn-simple btn-twitter"><i class="fa fa-twitter"></i></a>
-								<a href="#pablo" class="btn btn-just-icon btn-simple btn-pinterest"><i class="fa fa-pinterest"></i></a>
-							</div>
-						</div>
-					</div>
+<div class="main main-raised">
+	<div class="profile-content">
+		<div class="container">
+			<div class="row">
+				<div class="text-center">
+					<h3 class="title">{{ Auth::user()->name }}</h3>
 				</div>
-
-
-				<div class="description text-center">
-					<p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="profile-tabs">
-							<div class="nav-align-center">
-								<ul class="nav nav-pills nav-pills-icons" role="tablist">
-									<li class="active">
-										<a href="#work" role="tab" data-toggle="tab">
-											<i class="material-icons">palette</i>
-											Work
-										</a>
-									</li>
-									<li>
-										<a href="#connections" role="tab" data-toggle="tab">
-											<i class="material-icons">people</i>
-											Connections
-										</a>
-									</li>
-									<li>
-										<a href="#media" role="tab" data-toggle="tab">
-											<i class="material-icons">camera</i>
-											Media
-										</a>
-									</li>
-								</ul>
-
-
-							</div>
-						</div>
-						<!-- End Profile Tabs -->
-					</div>
-				</div>
-				<div class="tab-content">
-					<div class="tab-pane active work" id="work">
-						<div class="row">
-							<div class="col-md-7 col-md-offset-1">
-								<h4 class="title">Latest Collections</h4>
-								<div class="row collections">
-									<div class="col-md-6">
-										<div class="card card-background" style="background-image: url('../assets/img/examples/chris4.jpg')">
-											<a href="#pablo"></a>
-											<div class="card-content">
-												<label class="label label-primary">Spring 2016</label>
-												<a href="#pablo">
-													<h2 class="card-title">Stilleto</h2>
-												</a>
-											</div>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane active work" id="work">
+					<div class="row">
+						<div class="col-md-7 col-md-offset-1">
+							<div class="row collections">
+								<div class="col-md-6">
+									<div class="card card-background" style="background-image: url({{ Auth::user()->avatar ?: '/images/placeholder.jpg'}})">
+										<a href="#pablo"></a>
+										<div class="card-content">
+											<label class="label label-primary">春</label>
+											<a href="#pablo">
+												<h2 class="card-title">春生</h2>
+											</a>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="card card-background" style="background-image: url('../assets/img/examples/chris6.jpg')">
-											<a href="#pablo"></a>
-											<div class="card-content">
-												<label class="label label-primary">Spring 2016</label>
-												<a href="#pablo">
-													<h2 class="card-title">High Heels</h2>
-												</a>
-											</div>
+								</div>
+								<div class="col-md-6">
+									<div class="card card-background" style="background-image: url({{ Auth::user()->avatar ?: '/images/placeholder.jpg'}})">
+										<a href="#pablo"></a>
+										<div class="card-content">
+											<label class="label label-primary">夏</label>
+											<a href="#pablo">
+												<h2 class="card-title">夏长</h2>
+											</a>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="card card-background" style="background-image: url('../assets/img/examples/chris5.jpg')">
-											<a href="#pablo"></a>
-											<div class="card-content">
-												<label class="label label-primary">Summer 2016</label>
-												<a href="#pablo">
-													<h2 class="card-title">Flats</h2>
-												</a>
-											</div>
+								</div>
+								<div class="col-md-6">
+									<div class="card card-background" style="background-image: url({{ Auth::user()->avatar ?: '/images/placeholder.jpg'}})">
+										<a href="#pablo"></a>
+										<div class="card-content">
+											<label class="label label-primary">秋</label>
+											<a href="#pablo">
+												<h2 class="card-title">秋收</h2>
+											</a>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="card card-background" style="background-image: url('../assets/img/examples/chris1.jpg')">
-											<a href="#pablo"></a>
-											<div class="card-content">
-												<label class="label label-primary">Winter 2015</label>
-												<a href="#pablo">
-													<h2 class="card-title">Men's Sneakers</h2>
-												</a>
-											</div>
+								</div>
+								<div class="col-md-6">
+									<div class="card card-background" style="background-image: url({{ Auth::user()->avatar ?: '/images/placeholder.jpg'}})">
+										<a href="#pablo"></a>
+										<div class="card-content">
+											<label class="label label-primary">冬</label>
+											<a href="#pablo">
+												<h2 class="card-title">冬藏</h2>
+											</a>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2 col-md-offset-1 stats">
-								<h4 class="title">Stats</h4>
-								<ul class="list-unstyled">
-									<li><b>60</b> Products</li>
-									<li><b>4</b> Collections</li>
-									<li><b>331</b> Influencers</li>
-									<li><b>1.2K</b> Likes</li>
-								</ul>
-								<hr>
-								<h4 class="title">About his Work</h4>
-								<p class="description">French luxury footwear and fashion. The footwear has incorporated shiny, red-lacquered soles that have become his signature.</p>
-								<hr>
-								<h4 class="title">Focus</h4>
-								<span class="label label-primary">Footwear</span>
-								<span class="label label-rose">Luxury</span>
-							</div>
+						</div>
+						<div class="col-md-2 col-md-offset-1 stats">
+							<h4 class="title">爱好</h4>
+							<ul class="list-unstyled">
+								<li>古诗词</li>
+								<li>天文</li>
+								<li>说文</li>
+								<li>道家</li>
+								<li>诸子</li>
+							</ul>
+							<hr>
+							<h4 class="title">关于我</h4>
+							<p class="description">弃我去者，昨日之日不可留；乱我心者，今日之日多烦忧。</p>
+							<hr>
+							<h4 class="title">联系我</h4>
+							<p class="description"><a href="http://www.zzideqile.com">个人网站</a></p>
 						</div>
 					</div>
-					<div class="tab-pane connections" id="connections">
-						<div class="row">
-							<div class="col-md-5 col-md-offset-1">
-								<div class="card card-profile card-plain">
-									<div class="col-md-5">
-										<div class="card-image">
-											<a href="#pablo">
-												<img class="img" src="/images/placeholder.jpg">
-											</a>
-											<div class="colored-shadow" style="background-image: url(&quot;/images/placeholder.jpg&quot;); opacity: 1;"></div></div>
-									</div>
-									<div class="col-md-7">
-										<div class="card-content">
-											<h4 class="card-title">Gigi Hadid</h4>
-											<h6 class="category text-muted">Model</h6>
-
-											<p class="card-description">
-												Don't be scared of the truth because we need to restart the human foundation in truth...
-											</p>
-										</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<div class="card card-profile card-plain">
+								<div class="col-md-5">
+									<div class="card-image">
+										<img class="img" src="{{ Auth::user()->avatar ?: '/images/placeholder.jpg'}}">
 									</div>
 								</div>
-							</div>
-
-							<div class="col-md-5">
-								<div class="card card-profile card-plain">
-									<div class="col-md-5">
-										<div class="card-image">
-											<a href="#pablo">
-												<img class="img" src="../assets/img/faces/marc.jpg">
-											</a>
-											<div class="colored-shadow" style="background-image: url(&quot;../assets/img/faces/marc.jpg&quot;); opacity: 1;"></div></div>
-									</div>
-									<div class="col-md-7">
-										<div class="card-content">
-											<h4 class="card-title">Marc Jacobs</h4>
-											<h6 class="category text-muted">Designer</h6>
-
-											<p class="card-description">
-												Don't be scared of the truth because we need to restart the human foundation in truth...
-											</p>
-										</div>
+								<div class="col-md-7">
+									<div class="card-content">
+										<h4 class="card-title">测试个人中心</h4>
+										<p class="card-description">
+											爆竹声中一岁除，春风送暖入屠苏。
+										</p>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-5 col-md-offset-1">
-								<div class="card card-profile card-plain">
-									<div class="col-md-5">
-										<div class="card-image">
-											<a href="#pablo">
-												<img class="img" src="../assets/img/faces/kendall.jpg">
-											</a>
-											<div class="colored-shadow" style="background-image: url(&quot;../assets/img/faces/kendall.jpg&quot;); opacity: 1;"></div></div>
-									</div>
-									<div class="col-md-7">
-										<div class="card-content">
-											<h4 class="card-title">Kendall Jenner</h4>
-											<h6 class="category text-muted">Model</h6>
-
-											<p class="card-description">
-												I love you like Kanye loves Kanye. Don't be scared of the truth.
-											</p>
-										</div>
+						<div class="col-md-5">
+							<div class="card card-profile card-plain">
+								<div class="col-md-5">
+									<div class="card-image">
+										<img class="img" src="{{ Auth::user()->avatar ?: '/images/placeholder.jpg'}}">
 									</div>
 								</div>
-							</div>
-
-							<div class="col-md-5">
-								<div class="card card-profile card-plain">
-									<div class="col-md-5">
-										<div class="card-image">
-											<a href="#pablo">
-												<img class="img" src="../assets/img/faces/card-profile2-square.jpg">
-											</a>
-											<div class="colored-shadow" style="background-image: url(&quot;../assets/img/faces/card-profile2-square.jpg&quot;); opacity: 1;"></div></div>
-									</div>
-									<div class="col-md-7">
-										<div class="card-content">
-											<h4 class="card-title">George West</h4>
-											<h6 class="category text-muted">Model/DJ</h6>
-
-											<p class="card-description">
-												I love you like Kanye loves Kanye.
-											</p>
-										</div>
+								<div class="col-md-7">
+									<div class="card-content">
+										<h4 class="card-title">测试个人中心1</h4>
+										<p class="card-description">
+											晴日暖风生麦气，绿阴幽草胜花时。
+										</p>
 									</div>
 								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="tab-pane text-center gallery" id="media">
-						<div class="row">
-							<div class="col-md-3 col-md-offset-3">
-								<img src="../assets/img/examples/chris4.jpg" class="img-rounded">
-								<img src="../assets/img/examples/chris6.jpg" class="img-rounded">
-							</div>
-							<div class="col-md-3">
-								<img src="../assets/img/examples/chris7.jpg" class="img-rounded">
-								<img src="../assets/img/examples/chris5.jpg" class="img-rounded">
-								<img src="../assets/img/examples/chris9.jpg" class="img-rounded">
 							</div>
 						</div>
 					</div>
@@ -237,4 +119,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 @endsection

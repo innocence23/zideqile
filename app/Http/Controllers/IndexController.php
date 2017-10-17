@@ -199,13 +199,45 @@ class IndexController extends Controller
     }
 
     /**
-     * 搜索页
+     * 搜索结果页
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search()
+    public function result()
     {
-        return view('front.search');
+        $result = [];
+        if(isset($_GET['search']) && !empty($_GET['search'])){
+            $search = $_GET['search'];
+            $res = DB::select("
+                select id, t.name title, t.id slug, t.created_at created_at, 1 type
+                from single_pages t
+                where t.status =1 and t.type = 5 and t.name like '%{$search}%'
+                union all
+                select id, t.name title, t.slug slug, t.created_at created_at, 2 type
+                from posts t
+                where t.status =1 and t.name like '%{$search}%'
+                union all
+                select id, t.jianti title, t.slug slug, t.created_at created_at, 3 type
+                from dicts t
+                where (t.jianti = '{$search}' or t.fanti = '{$search}') and t.status =1 order by created_at desc;
+                ");
+            foreach ($res as $k=>$v) {
+                $result[$k]['title'] = str_replace("{$search}",
+                    "<strong style='color:red;'>{$search}</strong>", $v->title);
+                $result[$k]['created_at'] = $v->created_at;
+                if($v->type == 1){
+                    $result[$k]['link'] = route('zhuanti-info', [$v->slug]);
+                    $result[$k]['type'] = '专题';
+                }elseif($v->type == 2){
+                    $result[$k]['link'] = route('blog', [$v->slug]);
+                    $result[$k]['type'] = '文章';
+                }elseif($v->type == 3){
+                    $result[$k]['link'] = route('dict', [$v->slug]);
+                    $result[$k]['type'] = '字典';
+                }
+            }
+        }
+        return view('front.result', ['result'=>$result]);
     }
 
     /**
@@ -238,16 +270,6 @@ class IndexController extends Controller
         //更新缓存
         $setting = Redis::HGETALL('setting');
         return view('front.contact', $setting);
-    }
-
-    /**
-     * 个人主页
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        return view('front.profile');
     }
 
     /**
@@ -327,6 +349,15 @@ class IndexController extends Controller
         return view('front.zhuanti-info', ['zhuanti'=>$zhuanti]);
     }
 
+    /**
+     * 个人主页
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return view('front.profile');
+    }
 
     /**
      * 产品页
