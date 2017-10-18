@@ -82,10 +82,10 @@ class IndexController extends Controller
             ->where('taggable_type', 'App\Dict')->pluck('taggable_id')->toArray();
         $tag_dict_ids = array_unique($tag_dict_ids);
         //相关类似文章推荐
-        $similarDicts = Dict::select(['fanti', 'slug', 'image'])->where([
-            ['cate_id',$dict->cate_id],
+        $similarDicts = Dict::select(['fanti', 'slug'])->where([
             ['id', '!=', $dict->id],
-        ])->whereIn('id', $tag_dict_ids)->orderBy(\DB::raw('RAND()'))->limit(3)->get();
+            ['bushou_id', '=', $dict->bushou_id],
+        ])->whereIn('id', $tag_dict_ids)->orderBy(\DB::raw('RAND()'))->limit(6)->get();
 
         //存访问量
         Redis::pipeline(function ($pipe) use($dict) {

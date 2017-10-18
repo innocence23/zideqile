@@ -127,12 +127,13 @@
                         <div class="col-md-3">
                             <div class="lead">相关字</div>
                             <div class="row">
-                                <?php $arr = range(0,5);?>
-                                @foreach($arr as $v)
+                                @foreach($similarDicts as $v)
                                 <div class="col-xs-4 col-md-6 card-profile">
-                                    <div class="dict-img">
-                                        <div class="dict-title">天</div>
-                                    </div>
+                                    <a href="{{route('dict', $v->slug)}}">
+                                        <div class="dict-img">
+                                            <div class="dict-title">{{$v->fanti}}</div>
+                                        </div>
+                                    </a>
                                 </div>
                                 @endforeach
                             </div>
@@ -290,6 +291,7 @@
             margin: 0;
             padding: 0;
             font-size: 60px;
+            color: black;
         }
     </style>
 @endsection
