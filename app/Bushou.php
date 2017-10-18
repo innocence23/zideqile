@@ -12,6 +12,8 @@ class Bushou extends Model
     {
         if(!isset($attr) || empty($attr)){
             $this->attributes['desc'] = '';
+        } else {
+            $this->attributes['desc'] = $attr;
         }
     }
 }

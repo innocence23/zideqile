@@ -13,6 +13,8 @@ class Dict extends Model
     {
         if(!isset($attr) || empty($attr)){
             $this->attributes['yitizi'] = '';
+        } else {
+            $this->attributes['yitizi'] = $attr;
         }
     }
 
