@@ -14,7 +14,7 @@ class AddFieldZituToDict extends Migration
     public function up()
     {
         Schema::table('dicts', function (Blueprint $table) {
-            $table->string('zitu', 65)->comment('汉字形象图片')->default('');
+            $table->string('zitu', 65)->comment('汉字形象图片')->default('')->after('cate_id');
         });
     }
 

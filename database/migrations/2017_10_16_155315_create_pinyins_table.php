@@ -16,7 +16,7 @@ class CreatePinyinsTable extends Migration
         Schema::create('pinyins', function (Blueprint $table) {
             $table->increments('id');
             $table->char('first', 1);
-            $table->string('name', 5)->unique();
+            $table->string('name', 6)->unique();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
