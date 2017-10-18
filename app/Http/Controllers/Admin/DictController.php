@@ -6,6 +6,7 @@ use App\Admin;
 use App\Dict;
 use App\Bushou;
 use App\Category;
+use App\Pinyin;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,9 +82,10 @@ class DictController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function cateAndBushou()
+    public function cateAndBushouAndPinyin()
     {
         $data['bushous'] = Bushou::all(['id','name']);
+        $data['pinyins'] = Pinyin::all(['name','name']);
         $data['tags'] = Tag::all(['id','name']);
         $data['categories'] = [];
         $categories = Category::orderby('weight', 'desc')->get(['id','name', 'pid']);
@@ -180,6 +182,7 @@ class DictController extends Controller
             )->save();
             $data['zitu'] = $res;
         }
+        $data['pinyin'] = explode(':', $request->input('pinyin', 0))[1];
         $data['bushou_id'] = explode(':', $request->input('bushou_id', 0))[1];
         $data['cate_id'] = explode(':', $request->input('cate_id', 0))[1];
         $id = auth('admin')->user()->id;
@@ -261,6 +264,7 @@ class DictController extends Controller
                 $data['zitu'] = $res;
             }
         }
+        $data['pinyin'] = explode(':', $request->input('pinyin', 0))[1];
         $data['bushou_id'] = explode(':', $request->input('bushou_id', 0))[1];
         $data['cate_id'] = explode(':', $request->input('cate_id', 0))[1];
         $data['updated_by'] = auth('admin')->user()->id;

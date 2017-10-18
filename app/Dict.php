@@ -9,6 +9,13 @@ class Dict extends Model
     protected $fillable = ['jianti', 'fanti', 'slug', 'pinyin', 'bushou_id', 'cate_id', 'zitu', 'image', 'yitizi',
         'shuowen', 'jieshi', 'cizu', 'created_by', 'updated_by', 'status'];
 
+    public function setYitiziAttribute($attr)
+    {
+        if(!isset($attr) || empty($attr)){
+            $this->attributes['yitizi'] = '';
+        }
+    }
+
     public function user(){
         return $this->hasOne('App\Admin', 'id', 'created_by');
     }

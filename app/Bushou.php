@@ -10,9 +10,8 @@ class Bushou extends Model
 
     public function setDescAttribute($attr)
     {
-    if(!isset($attr) || empty($attr))
-    {
-        $this->attributes['desc'] = '';
-    }
+        if(!isset($attr) || empty($attr)){
+            $this->attributes['desc'] = '';
+        }
     }
 }

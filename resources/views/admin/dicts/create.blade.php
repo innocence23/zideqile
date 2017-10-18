@@ -46,7 +46,12 @@
                             </div>
                             <div class="form-group"  ng-class="{ 'has-error' : myForm.pinyin.$dirty && myForm.pinyin.$invalid }">
                                 <label for="pinyin" class="control-label">拼音:</label>
-                                <input type="text" class="form-control" name="pinyin" id="pinyin" required ng-model="dict.pinyin">
+                                <select chosen class="form-control" name="pinyin" id="pinyin"
+                                        placeholder-text-single="'请选择拼音'" no-results-text="'未找到'"
+                                        required ng-model="dict.pinyin"
+                                        ng-options="s.name as s.name for s in data.pinyins">
+                                    <option value=""></option>
+                                </select>
                                 <p ng-show="myForm.pinyin.$dirty && myForm.pinyin.$invalid" class="help-block">不能为空</p>
                             </div>
                             <div class="form-group"  ng-class="{ 'has-error' : myForm.bushou_id.$dirty && myForm.bushou_id.$invalid }">

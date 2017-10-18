@@ -74,7 +74,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth
 
     //字典
     Route::get('dict/lists', 'DictController@getLists')->name('dict.lists');
-    Route::get('dict/catetag', 'DictController@cateAndBushou')->name('dict.catebushou');
+    Route::get('dict/catetag', 'DictController@cateAndBushouAndPinyin')->name('dict.catebushou');
     Route::post('dict/{dict}', 'DictController@disable')->name('dict.disable');
     Route::resource('dict', 'DictController', ['only' =>
         ['index', 'create', 'store', 'edit', 'update', 'show']
