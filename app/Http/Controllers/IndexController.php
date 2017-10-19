@@ -93,7 +93,6 @@ class IndexController extends Controller
             Redis::zincrby('dict_view', 1, 'dict_'.$dict->id);
         });
         $viewcount = Redis::get('dict_'.$dict->id.'_view');
-
         return view('front.dict', ['dict'=>$dict, 'viewcount'=>$viewcount, 'similarDicts'=>$similarDicts]);
     }
 

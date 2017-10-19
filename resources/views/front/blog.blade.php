@@ -17,7 +17,7 @@
                         <li>
                             <a href="{{ route('blog.category', $blog->category->name) }}">{{$blog->category->name}}</a>
                         </li>
-                        <li class="active">{{ $blog->title }}</li>
+                        <li class="active">{{ $blog->name }}</li>
                     </ul>
                 </div>
 
@@ -32,11 +32,12 @@
                             <a href="{{ route('blog.category', $blog->category->name) }}" >
                                 {{ $blog->category->name }}</a>&nbsp;&nbsp;</span>
                         <span class="fa fa-comments-o">
-                            <a href="#maodian-comments"> {{ $blog->comments()->count() }} 条评论</a>&nbsp;&nbsp;</span>
+                            <a href="#maodian-comments"> <span>{{ $blog->comments()->count() }}</span> 条评论</a>&nbsp;&nbsp;
+                        </span>
                         <span class="fa fa-user"><a href="#pablo"> {{ $blog->user->name }} </a>&nbsp;&nbsp;</span>
                     </span>
                 </div>
-                <hr>
+                <h1>{{ $blog->name }}</h1>
                 <div id="content" class="section-text">
                     {!! $blog->content !!}
                 </div>
@@ -74,6 +75,7 @@
                         <div class="media-body">
                             <form role="form" id="comment-form" method="post">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="post">
                                 <input type="hidden" name="post_id" value="{{$blog->id}}">
                                 <input type="hidden" name="parent_id" value="0">
                                 <div class="label-floating row">
@@ -207,8 +209,11 @@
                         $('#comment_textarea input[name="parent_id"]').val(0);
                         $('.comment_markup').after($('#comment_textarea'));
                         $('#comment-form textarea').val('');
+                        $('.label-floating.row input').val('');
                         $('#cancel-comment').hide();
-                        $('#ccount').html(parseInt($('#ccount').html())+1);
+                        var c = parseInt($('#ccount').html()) + 1;
+                        $('#ccount').html(c);
+                        $('.fa.fa-comments-o a span').html(c);
                         getComments();
                     });
             });
@@ -216,7 +221,7 @@
             getComments();
             function getComments(){
                 var $url = "{{route('api.comment.data', '')}}";
-                $url += "/" + '{{$blog->id}}';
+                $url += "/post/" + '{{$blog->id}}';
                 $.get($url,
                 //$.get("/admin/common/list-comment/"+'{{$blog->id}}',
                     function(data){

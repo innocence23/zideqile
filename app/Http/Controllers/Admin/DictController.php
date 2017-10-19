@@ -171,7 +171,7 @@ class DictController extends Controller
         $file = $request->file('image');
         if($file->isValid()) {
             $res = $file->store(date('Y-m'), 'public');
-            Image::make(public_path('uploads/' . $res))->resize(700, 80
+            Image::make(public_path('uploads/' . $res))->resize(900, 300
             )->save();
             $data['image'] = $res;
         }
@@ -246,7 +246,7 @@ class DictController extends Controller
                     }
                 }
                 $res = $file->store(date('Y-m'), 'public');
-                Image::make(public_path('uploads/' . $res))->resize(700, 80)->save();
+                Image::make(public_path('uploads/' . $res))->resize(900, 300)->save();
                 $data['image'] = $res;
             }
         }

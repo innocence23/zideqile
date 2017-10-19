@@ -22,7 +22,12 @@ class CommentController extends Controller
         $model->uid = $request->input('user_id', 0);
         $model->parent_id =  $request->input('parent_id', 0);
         $model->commentable_id = $request->input('post_id', '');
-        $model->commentable_type = 'App\Post';
+        $type = $request->input('type', 'post');
+        if($type == 'dict'){
+            $model->commentable_type = 'App\Dict';
+        } else {
+            $model->commentable_type = 'App\Post';
+        }
         $model->content = $request->input('content', '');
         $model->nickname = $request->input('name', '');
         $model->support = 0;
@@ -31,13 +36,19 @@ class CommentController extends Controller
     }
 
     /**
+     * @param $type
      * @param $post_id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function ListComments($post_id)
+    public function ListComments($type, $post_id)
     {
+        if($type == 'dict'){
+            $flag = 'App\Dict';
+        } else {
+            $flag = 'App\Post';
+        }
         $model = Comment::leftJoin('users', 'comments.uid', '=', 'users.id')
-            ->where(['commentable_id'=>$post_id, 'commentable_type'=>'App\Post', 'comments.status'=>1])
+            ->where(['commentable_id'=>$post_id, 'commentable_type'=>$flag, 'comments.status'=>1])
             ->orderBy('comments.created_at', 'desc')
             ->get(['comments.id', 'comments.nickname', 'comments.uid', 'name', 'avatar', 'parent_id',
                 'commentable_id', 'support', 'content', 'comments.created_at']);

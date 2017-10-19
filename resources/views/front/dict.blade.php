@@ -33,7 +33,7 @@
                                 {{$dict->category->name}}</a>&nbsp;&nbsp;
                         </span>
                         <span class="fa fa-comments-o">
-                            <a href="#maodian-comments"> {{ $dict->comments()->count() }} 条评论</a>&nbsp;&nbsp;
+                            <a href="#maodian-comments"> <span>{{ $dict->comments()->count() }}</span> 条评论</a>&nbsp;&nbsp;
                         </span>
                     </span>
                 </div>
@@ -56,8 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xs-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
+                                    <table class="table table-bordered table-hover">
                                             <tbody>
                                             <tr>
                                                 <td width="20%">拼 音</td>
@@ -81,7 +80,6 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                    </div>
                                 </div>
                             </div>
 
@@ -174,6 +172,7 @@
                         <div class="media-body">
                             <form role="form" id="comment-form" method="post">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="dict">
                                 <input type="hidden" name="post_id" value="{{$dict->id}}">
                                 <input type="hidden" name="parent_id" value="0">
                                 <div class="label-floating row">
@@ -272,8 +271,8 @@
             font-size: 14px !important;
         }
         div.dict-zitu {
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 140px;
         }
         div.dict-img {
             width: 100px;
@@ -314,8 +313,11 @@
                         $('#comment_textarea input[name="parent_id"]').val(0);
                         $('.comment_markup').after($('#comment_textarea'));
                         $('#comment-form textarea').val('');
+                        $('.label-floating.row input').val('');
                         $('#cancel-comment').hide();
-                        $('#ccount').html(parseInt($('#ccount').html()) + 1);
+                        var c = parseInt($('#ccount').html()) + 1;
+                        $('#ccount').html(c);
+                        $('.fa.fa-comments-o a span').html(c);
                         getComments();
                     });
             });
@@ -324,9 +326,9 @@
 
             function getComments() {
                 var $url = "{{route('api.comment.data', '')}}";
-                $url += "/" + '{{$dict->id}}';
+                $url += "/dict/" + '{{$dict->id}}';
                 $.get($url,
-                    //$.get("/admin/common/list-comment/"+'{{$dict->id}}',
+                //$.get("/admin/common/list-comment/dict/"+'{{$dict->id}}',
                     function (data) {
                         $('#comments').html(data);
                         //评论样式处理
