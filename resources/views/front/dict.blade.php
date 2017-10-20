@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('html_title')
-    {{ $dict->title or "博客"}}
+    汉字：{{ $dict->fanti or "字典"}}
 @endsection
 
 @section('main-content')
@@ -22,7 +22,7 @@
                     </ul>
                 </div>
 
-                <h3 class="title">{{ $dict->jianti }} / {{ $dict->fanti }}</h3>
+                <h3 class="title">{{ $dict->jianti }}</h3>
                 <div class="clearfix entry-meta">
                     <span class="pull-left">
                         <span class="fa fa-calendar">
@@ -44,14 +44,14 @@
                             <div class="card card-plain">
                                 <div class="col-md-3 col-xs-6">
                                     <div class="dict-img">
-                                        <div class="dict-title">{{$dict->fanti}}</div>
+                                        <div class="dict-title">{{$dict->jianti}}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-xs-6">
                                     <div class="dict-zitu">
                                         <a data-fancybox class="card-image" href="{{'/uploads/'.$dict->zitu}}">
                                             <img src="{{'/uploads/'.$dict->zitu}}"
-                                                 alt="{{$dict->fanti}}" class="img-rounded">
+                                                 alt="{{$dict->jianti}}" class="img-rounded">
                                         </a>
                                     </div>
                                 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('html_title')
-    {{ $dict->title or "博客"}}
+    字典检索
 @endsection
 
 @section('main-content')

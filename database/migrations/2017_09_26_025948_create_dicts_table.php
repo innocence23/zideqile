@@ -24,7 +24,7 @@ class CreateDictsTable extends Migration
             $table->string('image', 65)->comment('甲骨图片');
             $table->string('yitizi', 50)->comment('异体字')->default("");
             $table->string('shuowen', 80)->comment('说文解字');
-            $table->string('jieshi', 1000)->comment('解释');
+            $table->string('jieshi', 3000)->comment('解释');
             $table->string('cizu', 1000)->comment('词组');
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
