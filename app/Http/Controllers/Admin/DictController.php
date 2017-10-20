@@ -163,6 +163,7 @@ class DictController extends Controller
             'image' => 'required|image',
             'zitu' => 'image',
             'shuowen' => 'required',
+            'benyuan' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
         ]);
@@ -230,6 +231,7 @@ class DictController extends Controller
             'image' => 'image',
             'zitu' => 'image',
             'shuowen' => 'required',
+            'benyuan' => 'required',
             'jieshi' => 'required',
             'cizu' => 'required'
         ]);

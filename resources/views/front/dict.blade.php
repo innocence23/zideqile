@@ -57,32 +57,31 @@
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <table class="table table-bordered table-hover">
-                                            <tbody>
-                                            <tr>
-                                                <td width="20%">拼 音</td>
-                                                <td>
-                                                    <strong><a href="{{route('dict-type', ['pinyin', $dict->pinyin])}}">{{$dict->pinyin}}</a></strong>
-                                                </td>
-                                                <td width="20%">简 体</td>
-                                                <td><strong>{{$dict->fanti}}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="20%">繁 体</td>
-                                                <td><strong>{{$dict->jianti}}</strong></td>
-                                                <td width="20%">部 首</td>
-                                                <td>
-                                                    <strong><a href="{{route('dict-type', ['bushou', $dict->bushou->id])}}">{{$dict->bushou->name}}</a></strong>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="20%">异体字</td>
-                                                <td colspan="3"><strong>{{$dict->yitizi}}</strong></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <tbody>
+                                        <tr>
+                                            <td width="20%">拼 音</td>
+                                            <td>
+                                                <strong><a href="{{route('dict-type', ['pinyin', $dict->pinyin])}}">{{$dict->pinyin}}</a></strong>
+                                            </td>
+                                            <td width="20%">简 体</td>
+                                            <td><strong>{{$dict->fanti}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%">繁 体</td>
+                                            <td><strong>{{$dict->jianti}}</strong></td>
+                                            <td width="20%">部 首</td>
+                                            <td>
+                                                <strong><a href="{{route('dict-type', ['bushou', $dict->bushou->id])}}">{{$dict->bushou->name}}</a></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%">异体字</td>
+                                            <td colspan="3"><strong>{{$dict->yitizi}}</strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
                             <div class="panel panel-danger">
                                 <div class="panel-heading">
                                     <h3>甲骨文</h3>
@@ -107,6 +106,16 @@
                             </div>
                             <div class="panel panel-info">
                                 <div class="panel-heading">
+                                    <h3>造字本源</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <blockquote>
+                                        <p>{{ $dict->benyuan }} </p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            <div class="panel panel-error">
+                                <div class="panel-heading">
                                     <h3>释义</h3>
                                 </div>
                                 <div class="panel-body">
@@ -115,7 +124,7 @@
                             </div>
                             <div class="panel panel-warning">
                                 <div class="panel-heading">
-                                    <h3>组词</h3>
+                                    <h3>诗词组词</h3>
                                 </div>
                                 <div class="panel-body">
                                     {!! $dict->cizu !!}
@@ -269,6 +278,10 @@
         }
         .blog-post .section-text p {
             font-size: 14px !important;
+        }
+        .blog-post .section-text blockquote p {
+            text-shadow: 0 0 1px currentColor,1px 1px 1px #000,1px 1px 2px #000;
+            font-size: 16px !important;
         }
         div.dict-zitu {
             width: 120px;

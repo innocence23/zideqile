@@ -91,14 +91,19 @@
                                 <label for="image" class="control-label">甲骨文:</label>
                                 <input type="file" class="form-control" name="image" id="image" ng-model="dict.image">
                             </div>
+                            <div class="form-group">
+                                <label for="yitizi" class="control-label">异体字:</label>
+                                <input type="text" class="form-control" name="yitizi" id="yitizi" ng-model="dict.yitizi">
+                            </div>
                             <div class="form-group"  ng-class="{ 'has-error' : myForm.shuowen.$dirty && myForm.shuowen.$invalid }">
                                 <label for="shuowen" class="control-label">说文解字:</label>
                                 <input type="text" class="form-control" name="shuowen" id="shuowen" required ng-model="dict.shuowen">
                                 <p ng-show="myForm.shuowen.$dirty && myForm.shuowen.$invalid" class="help-block">不能为空</p>
                             </div>
-                            <div class="form-group">
-                                <label for="yitizi" class="control-label">异体字:</label>
-                                <input type="text" class="form-control" name="yitizi" id="yitizi" ng-model="dict.yitizi">
+                            <div class="form-group"  ng-class="{ 'has-error' : myForm.benyuan.$dirty && myForm.benyuan.$invalid }">
+                                <label for="benyuan" class="control-label">造字本源:</label>
+                                <textarea class="form-control" name="benyuan" id="benyuan" required ng-model="dict.benyuan" rows="3"></textarea>
+                                <p ng-show="myForm.benyuan.$dirty && myForm.benyuan.$invalid" class="help-block">不能为空</p>
                             </div>
                             <div class="form-group <?php if($errors->has('jieshi')) echo 'has-error';?>" >
                                 <label for="jieshi" class="control-label">解释:</label>
@@ -107,7 +112,7 @@
                                 <p ng-show=" <?php if($errors->has('jieshi')) {echo true;} else{ echo false; } ?>" class="help-block">内容不能为空</p>
                             </div>
                             <div class="form-group <?php if($errors->has('cizu')) echo 'has-error';?>" >
-                                <label for="cizu" class="control-label">词组:</label>
+                                <label for="cizu" class="control-label">诗词组词:</label>
                                 <textarea name="cizu" id="editor2" rows="10" cols="80" ng-model="dict.cizu"></textarea>
                                 <p ng-show=" <?php if($errors->has('cizu')) {echo true;} else{ echo false; } ?>" class="help-block">内容不能为空</p>
                             </div>
