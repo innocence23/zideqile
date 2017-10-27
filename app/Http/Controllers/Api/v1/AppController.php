@@ -19,14 +19,14 @@ class AppController extends Controller
     public function __construct()
     {
         $this->url =  Config::get('app.url');
-        $this->imgPrefix =  Config::get('app.url') . 'uploads/';
+        $this->imgPrefix =  Config::get('app.url') . '/uploads/';
     }
 
     public function articles()
     {
-        $blogs = Post::select('id', 'images', 'name', 'desc')->where('status', 1)->paginate($this->pageSize);
+        $blogs = Post::select('id', 'image', 'name', 'desc')->where('status', 1)->paginate($this->pageSize);
         foreach ($blogs as $k=>$v) {
-            $blogs[$k]->images = $this->imgPrefix . $v->images;
+            $blogs[$k]->image = $this->imgPrefix . $v->image;
         }
         return $blogs;
     }
@@ -35,7 +35,7 @@ class AppController extends Controller
     {
         $blog = Post::find($id);
         //转变头图
-        $blog->images = $this->imgPrefix . $blog->images;
+        $blog->image = $this->imgPrefix . $blog->image;
         //转变文章里面的图
         $blog->content = str_replace('src="/', "src=\"{$this->url}", $blog->content);
         return $blog;
@@ -43,9 +43,9 @@ class AppController extends Controller
 
     public function carousels()
     {
-        $carousels = Carousel::select('id', 'images', 'name', 'desc', 'url')->where('status', 1)->get();
+        $carousels = Carousel::select('id', 'image', 'name', 'desc', 'url')->where('status', 1)->get();
         foreach ($carousels as $k=>$v) {
-            $carousels[$k]->images = $this->imgPrefix . $v->images;
+            $carousels[$k]->image = $this->imgPrefix . $v->image;
         }
         return $carousels;
     }
@@ -53,7 +53,7 @@ class AppController extends Controller
     public function about()
     {
         $aboutus = SinglePage::where('type', 3)->value('content');
-        $aboutus = str_replace('src="/', "src=\"{$this->url}", $aboutus);
+        $aboutus = str_replace('src="/', "src=\"{$this->url}\\", $aboutus);
         return json_encode($aboutus);
     }
 
