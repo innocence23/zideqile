@@ -92,7 +92,6 @@
                         <h4 class="info-title">下载APP</h4>
                         <p><a href="/images/zideqile.apk">Android下载</a></p>
                         <p><a href="/images/zideqile.iso">IOS下载</a></p>
-
                     </div>
                 </div>
             </div>

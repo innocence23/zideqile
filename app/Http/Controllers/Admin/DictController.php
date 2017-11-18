@@ -176,7 +176,7 @@ class DictController extends Controller
         }
         $model = new Dict();
         $data = $request->all();
-        $data['image'] = 'linshijiaguwen.jpg.jpg';
+        $data['image'] = 'linshijiaguwen.jpg';
         $data['zitu'] = 'linshitupian.jpg';
 
         $data['pinyin'] = explode(':', $request->input('pinyin', 0))[1];

@@ -165,13 +165,13 @@
                     'tags':  [4],
                     'pinyin': "<?php echo old('pinyin') ?: ''; ?>",
                     'bushou_id': "<?php echo old('bushou_id') ?: ''; ?>",
-                    'cate_id': "<?php echo old('cate_id') ?: 11; ?>",
+                    'cate_id': "<?php echo old('cate_id') ?: '11'; ?>",
                     'zitu':'zitu/T2FWtIRVCjf5rIDC8x99iRKTtqUpSaJTjzrdOvEq.png',
                     'image':'2017-10/BfHEXiZBQcdzrorflfEM0QsavQm0UmL4ExSybLiz.jpeg',
-                    'yitizi':"<?php echo old('yitizi') ?: '说文后续补充'; ?>",
+                    'yitizi':"<?php echo old('yitizi') ?: '异体字后续补充'; ?>",
                     'shuowen': "<?php echo old('shuowen') ?: '说文后续补充'; ?>",
-                    'jieshi': "<?php echo old('jieshi') ?: '说文后续补充'; ?>",
-                    'cizu': "<?php echo old('cizu') ?: '说文后续补充'; ?>",
+                    'jieshi': "<?php echo old('jieshi') ?: '解释后续补充'; ?>",
+                    'cizu': "<?php echo old('cizu') ?: '词组后续补充'; ?>",
                 };
 
                 //免得多次输入
