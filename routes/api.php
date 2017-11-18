@@ -34,6 +34,8 @@ Route::group(['namespace' => 'Api\v1', 'prefix' => 'v1'], function () {
 
     Route::group(['prefix' => 'app'], function () {
         //公用模块
+        Route::resource('test', 'TestController');
+        Route::get('test/search/{name}', 'TestController@search');
 
         Route::get('articles', 'AppController@articles')->name('api.app.articles');
         Route::get('article/{id}', 'AppController@articleInfo')->name('api.app.article.info');

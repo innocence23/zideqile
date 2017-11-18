@@ -11,6 +11,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class DictController extends Controller
@@ -146,12 +147,64 @@ class DictController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * //暂时关闭图片  简化版
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'jianti' => 'required|unique:dicts,jianti',
+            'fanti' => 'required|unique:dicts,fanti',
+            'slug' => 'required|unique:dicts,slug',
+            'pinyin' => 'required',
+            'bushou_id' => 'required',
+            'cate_id' => 'required',
+            //暂时关闭图片
+            //'image' => 'required|image',
+            //'zitu' => 'image',
+            'shuowen' => 'required',
+            'benyuan' => 'required',
+            'jieshi' => 'required',
+            'cizu' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect('/admin/dict/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $model = new Dict();
+        $data = $request->all();
+        $data['image'] = 'linshijiaguwen.jpg.jpg';
+        $data['zitu'] = 'linshitupian.jpg';
+
+        $data['pinyin'] = explode(':', $request->input('pinyin', 0))[1];
+        $data['bushou_id'] = explode(':', $request->input('bushou_id', 0))[1];
+        $data['cate_id'] = explode(':', $request->input('cate_id', 0))[1];
+        $id = auth('admin')->user()->id;
+        $data['created_by'] = $id;
+        $data['updated_by'] = $id;
+        $model->fill($data);
+        $model->save();
+
+        $tags_temp = $request->input('tags', []);
+        foreach ($tags_temp as $v) {
+            $tags[] = explode(':', $v)[1];
+        }
+        $model->tags()->sync($tags);
+        Session::flash('flash_message','字典添加成功');
+        return redirect()->route('dict.index');
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store1(Request $request)
     {
         $this->validate($request, [
             'jianti' => 'required|unique:dicts,jianti',

@@ -8,7 +8,6 @@
         <li class="active">字典添加</li>
     </ol>
 @stop
-
 @section('content')
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -160,19 +159,19 @@
         angular.module('myModule', ['localytics.directives'])
             .controller('myController', function ($scope, $http) {
                 $scope.dict = {
-                    'fanti':'',
-                    'jianti':'',
-                    'tags':'',
-                    'slug':'',
-                    'pinyin':'',
-                    'bushou_id': "",
-                    'cate_id':'',
-                    'zitu':'',
-                    'image':'',
-                    'yitizi':'',
-                    'shuowen':'',
-                    'jieshi':'',
-                    'cizu':'',
+                    'fanti': "<?php echo old('fanti') ?: ''; ?>",
+                    'jianti': "<?php echo old('jianti') ?: ''; ?>",
+                    'slug': "<?php echo old('slug') ?: ''; ?>",
+                    'tags':  [4],
+                    'pinyin': "<?php echo old('pinyin') ?: ''; ?>",
+                    'bushou_id': "<?php echo old('bushou_id') ?: ''; ?>",
+                    'cate_id': "<?php echo old('cate_id') ?: 11; ?>",
+                    'zitu':'zitu/T2FWtIRVCjf5rIDC8x99iRKTtqUpSaJTjzrdOvEq.png',
+                    'image':'2017-10/BfHEXiZBQcdzrorflfEM0QsavQm0UmL4ExSybLiz.jpeg',
+                    'yitizi':"<?php echo old('yitizi') ?: '说文后续补充'; ?>",
+                    'shuowen': "<?php echo old('shuowen') ?: '说文后续补充'; ?>",
+                    'jieshi': "<?php echo old('jieshi') ?: '说文后续补充'; ?>",
+                    'cizu': "<?php echo old('cizu') ?: '说文后续补充'; ?>",
                 };
 
                 //免得多次输入
