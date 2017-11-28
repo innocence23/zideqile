@@ -165,7 +165,7 @@
                     'tags':  [4],
                     'pinyin': "<?php echo old('pinyin') ?: ''; ?>",
                     'bushou_id': "<?php echo old('bushou_id') ?: ''; ?>",
-                    'cate_id': "<?php echo old('cate_id') ?: '11'; ?>",
+                    'cate_id': 11,
                     'zitu':'zitu/T2FWtIRVCjf5rIDC8x99iRKTtqUpSaJTjzrdOvEq.png',
                     'image':'2017-10/BfHEXiZBQcdzrorflfEM0QsavQm0UmL4ExSybLiz.jpeg',
                     'yitizi':"<?php echo old('yitizi') ?: '异体字后续补充'; ?>",
