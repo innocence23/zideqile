@@ -19,10 +19,13 @@
                     <div class="carousel-inner">
                         @foreach($carousels as $k=>$carousel)
                             <div class="item {{ $k==0 ? 'active' : '' }}">
-                                <img src="uploads/{{ $carousel->image }}" alt="Awesome Image">
-                                <div class="carousel-caption">
-                                    <h4><i class="material-icons">location_on</i>{{ $carousel->desc }}</h4>
-                                </div>
+								<a href="{{ $carousel->url }}" title="{{ $carousel->name }}">
+									<img src="uploads/{{ $carousel->image }}" alt="Awesome Image">
+								</a>
+								<div class="carousel-caption">
+									<h4><i class="material-icons">location_on</i>{{ $carousel->desc }}</h4>
+								</div>
+								
                             </div>
                         @endforeach
                     </div>
