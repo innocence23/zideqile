@@ -25,7 +25,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $carousels = Carousel::where('status', 1)->get();
+        $carousels = Carousel::where('status', 1)->orderby('weight', 'desc')->get();
         return view('front.index', ['carousels'=>$carousels]);
     }
 
